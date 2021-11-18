@@ -11,9 +11,6 @@ import MapKit
 class MapViewController: UIViewController {
     
     var mapView: MKMapView!
-    // Declare variables for POI label and switch
-    let poiLabel = UILabel()
-    let poiSwitch = UISwitch()
     
     override func loadView() {
         // Create a map view
@@ -21,6 +18,18 @@ class MapViewController: UIViewController {
         
         // Set it as *the* view of this view controller
         view = mapView
+        
+        // Declare variables for POI label and switch
+        let poiLabel = UILabel()
+        let poiSwitch = UISwitch()
+        // Declare variable for Find Me button
+        let findMe = UIButton()
+        // Change background and text color for Find Me button
+        findMe.backgroundColor = UIColor.white
+        findMe.setTitleColor(UIColor.black, for: .normal)
+        //findMe.layer.borderColor = UIColor(named: "F21B3F")?.cgColor
+        //findMe.layer.borderColor = UIColor.black.cgColor
+        
         
         let segmentedControl
                 = UISegmentedControl(items: ["Standard", "Hybrid", "Satellite"])
@@ -37,16 +46,20 @@ class MapViewController: UIViewController {
         // Assign text to POI label
         poiLabel.text = "Points of Interest"
         poiLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         // Add POI label to view
         view.addSubview(poiLabel)
         
         poiSwitch.translatesAutoresizingMaskIntoConstraints = false
         poiSwitch.isOn = false
         poiSwitch.addTarget(self, action: #selector(poiDisplay(_:)), for: .valueChanged)
-                
         // Add POI switch to view
         view.addSubview(poiSwitch)
+        
+        // Assign title to Find Me button
+        findMe.setTitle("Find Me", for: .normal)
+        findMe.translatesAutoresizingMaskIntoConstraints = false
+        // Add Find Me button to view
+        view.addSubview(findMe)
         
         let topConstraint =
             segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
@@ -66,6 +79,12 @@ class MapViewController: UIViewController {
         let poiSwitch2 = poiSwitch.leadingAnchor.constraint(equalTo: poiLabel.trailingAnchor, constant: 4)
         let poiSwitch3 = poiSwitch.centerYAnchor.constraint(equalTo: poiLabel.centerYAnchor)
         
+        // Constraints for Find me button
+        let findMeLabel1 = findMe.topAnchor.constraint(equalTo: poiLabel.bottomAnchor, constant: 8)
+        let findMeLabel2 = findMe.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)
+        let fmButtonWidthConstraint = findMe.widthAnchor.constraint(
+              equalToConstant: findMe.titleLabel!.intrinsicContentSize.width + 2.0 * 3)
+        
         // Activate all constraints
         topConstraint.isActive = true
         leadingConstraint.isActive = true
@@ -75,6 +94,9 @@ class MapViewController: UIViewController {
         poiSwitch1.isActive = true
         poiSwitch2.isActive = true
         poiSwitch3.isActive = true
+        findMeLabel1.isActive = true
+        findMeLabel2.isActive = true
+        fmButtonWidthConstraint.isActive = true
         
     }
     
@@ -98,6 +120,11 @@ class MapViewController: UIViewController {
         } else {
             mapView.pointOfInterestFilter = MKPointOfInterestFilter.excludingAll
         }
+    }
+    
+    // Function for "Find Me" to zoom to interesting location
+    @IBAction func findMeButton(_ findMe: UIButton) {
+        
     }
 
     
