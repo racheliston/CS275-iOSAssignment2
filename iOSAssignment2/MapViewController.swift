@@ -54,7 +54,7 @@ class MapViewController: UIViewController {
         view.addSubview(poiLabel)
         
         poiSwitch.translatesAutoresizingMaskIntoConstraints = false
-        poiSwitch.isOn = false
+        poiSwitch.isOn = true
         poiSwitch.addTarget(self, action: #selector(poiDisplay(_:)), for: .valueChanged)
         // Add POI switch to view
         view.addSubview(poiSwitch)
@@ -119,7 +119,7 @@ class MapViewController: UIViewController {
     }
     
     // Function to control POI on map when switch is on or off
-    @IBAction func poiDisplay(_ poiSwitch: UISwitch) {
+    @objc func poiDisplay(_ poiSwitch: UISwitch) {
         if (poiSwitch.isOn) {
             mapView.pointOfInterestFilter = MKPointOfInterestFilter.includingAll
         } else {
