@@ -81,7 +81,7 @@ class MapViewController: UIViewController {
         
         // Constraints for POI switch
         let poiSwitch1 = poiSwitch.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 8)
-        let poiSwitch2 = poiSwitch.leadingAnchor.constraint(equalTo: poiLabel.trailingAnchor, constant: 4)
+        let poiSwitch2 = poiSwitch.leadingAnchor.constraint(equalTo: poiLabel.trailingAnchor, constant: 12)
         let poiSwitch3 = poiSwitch.centerYAnchor.constraint(equalTo: poiLabel.centerYAnchor)
         
         // Constraints for Find me button
