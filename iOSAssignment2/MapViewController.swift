@@ -26,11 +26,13 @@ class MapViewController: UIViewController {
         let poiSwitch = UISwitch()
         // Declare variable for Find Me button
         let findMe = UIButton()
-        // Change background and text color for Find Me button
+        // Change background, text, and border color for Find Me button
         findMe.backgroundColor = UIColor.white
         findMe.setTitleColor(UIColor.black, for: .normal)
         findMe.layer.borderWidth = 1
         findMe.layer.borderColor = UIColor.black.cgColor
+        // set corner rounding for find me button to be 2 points
+        findMe.layer.cornerRadius = 2
         
         
         let segmentedControl
