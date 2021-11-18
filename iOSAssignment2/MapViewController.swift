@@ -29,6 +29,7 @@ class MapViewController: UIViewController {
         // Change background, text, and border color for Find Me button
         findMe.backgroundColor = UIColor.white
         findMe.setTitleColor(UIColor.black, for: .normal)
+        // Set border width for the button to be 1 point
         findMe.layer.borderWidth = 1
         findMe.layer.borderColor = UIColor.black.cgColor
         // set corner rounding for find me button to be 2 points
@@ -54,6 +55,7 @@ class MapViewController: UIViewController {
         view.addSubview(poiLabel)
         
         poiSwitch.translatesAutoresizingMaskIntoConstraints = false
+        // Set the state of the switch to "on" initially
         poiSwitch.isOn = true
         poiSwitch.addTarget(self, action: #selector(poiDisplay(_:)), for: .valueChanged)
         // Add POI switch to view
