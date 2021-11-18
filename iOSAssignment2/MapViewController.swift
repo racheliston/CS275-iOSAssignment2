@@ -12,6 +12,8 @@ class MapViewController: UIViewController {
     
     var mapView: MKMapView!
     
+    fileprivate let locationManager:CLLocationManager = CLLocationManager()
+    
     override func loadView() {
         // Create a map view
         mapView = MKMapView()
@@ -27,8 +29,8 @@ class MapViewController: UIViewController {
         // Change background and text color for Find Me button
         findMe.backgroundColor = UIColor.white
         findMe.setTitleColor(UIColor.black, for: .normal)
-        //findMe.layer.borderColor = UIColor(named: "F21B3F")?.cgColor
-        //findMe.layer.borderColor = UIColor.black.cgColor
+        findMe.layer.borderWidth = 1
+        findMe.layer.borderColor = UIColor.black.cgColor
         
         
         let segmentedControl
@@ -58,6 +60,7 @@ class MapViewController: UIViewController {
         // Assign title to Find Me button
         findMe.setTitle("Find Me", for: .normal)
         findMe.translatesAutoresizingMaskIntoConstraints = false
+        findMe.addTarget(self, action: #selector(findMeButton), for: .touchUpInside)
         // Add Find Me button to view
         view.addSubview(findMe)
         
@@ -122,12 +125,23 @@ class MapViewController: UIViewController {
         }
     }
     
+    // interesting location of choice (Eiffel Tower)
+    let eiffelTower = CLLocation(latitude: 48.8584, longitude: 2.2945)
+    
     // Function for "Find Me" to zoom to interesting location
-    @IBAction func findMeButton(_ findMe: UIButton) {
-        
+    @objc func findMeButton() {
+        centerMapOnLocation(location: eiffelTower)
+    }
+    
+    // Helper function to zoom in on location when Find Me button is pressed
+    let regionRadius: CLLocationDistance = 200
+    func centerMapOnLocation(location: CLLocation)
+    {
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                  latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
